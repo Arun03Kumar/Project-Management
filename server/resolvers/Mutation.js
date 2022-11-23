@@ -12,6 +12,11 @@ const Mutation = {
         return client.save()
     },
     deleteClient(parent, args, ctx, info) {
+        Project.find({clientID: args.id}).then((projects) => {
+            projects.forEach(project => {
+                project.remove()
+            })
+        })
         return Client.findByIdAndRemove(args.id)
     },
     addProject(parent, args, ctx, info) {
