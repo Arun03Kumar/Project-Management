@@ -1,0 +1,41 @@
+enum status {
+  NEW
+  PROGRESS
+  COMPLETED
+}
+
+type Query {
+  client(id: ID!): Client!
+  clients: [Client!]!
+  project(id: ID!): Project!
+  projects: [Project!]!
+}
+
+type Mutation {
+    addClient(name: String!, email: String!, phone: String!): Client!
+    deleteClient(id: ID!): Client!
+    addProject(name: String!, description: String!, status: status!, clientID: ID!): Project!
+    deleteProject(id: ID!): Project!
+    updateProject(id: ID!, name: String!, description: String!, status: status!): Project!
+}
+
+# input createClientInput {
+#   name: String!!
+#   email: String!
+#   phone: String!
+# }
+
+type Client {
+  id: ID!
+  name: String!
+  email: String!
+  phone: String!
+}
+
+type Project {
+  id: ID!
+  name: String!
+  description: String!
+  status: String!
+  client: Client!
+}
